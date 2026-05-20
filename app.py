@@ -165,6 +165,32 @@ strategies = {
 }
 
 
+portfolio_data = {
+    "market": "4-Asset Portfolio",
+    "symbol": "DJI30 + GC + SP500 + US Oil",
+    "magic": "-",
+    "date": "19/05/2026",
+    "leverage": "-",
+    "portfolio_size": "4",
+    "image": find_image([["portfoil", "DJ30", "SP500", "USOil"], ["portfoil"], ["portfolio"]]),
+    "annual_return": 85.95,
+    "monthly_return": 5.31,
+    "last_month_return": 5.08,
+    "annual_vol": 15.96,
+    "monthly_vol": 4.72,
+    "daily_vol": 1.01,
+    "sharpe": 0.25,
+    "sqn": 6.88,
+    "max_loss": -7.38,
+    "max_drawdown": -18.03,
+    "success_rate": 78.81,
+    "mean_gain": 0.54,
+    "mean_loss": -0.83,
+    "gain_loss_ratio": 0.653,
+    "oos_pvalue": 25.35
+}
+
+
 def pct(value):
     return f"{value:.2f}%"
 
@@ -487,6 +513,30 @@ def render_comparison():
     with c4:
         kpi_card("Best Success Rate", best_success["Success Rate"], "%", best_success["Strategy"], signed=True)
 
+
+    st.markdown('<div class="panel">', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">4-Asset Portfolio Highlight</div>', unsafe_allow_html=True)
+
+    p1, p2, p3, p4 = st.columns(4)
+
+    with p1:
+        kpi_card("Annualized Return", portfolio_data["annual_return"], "%", "Portfolio / 4 Assets", signed=True)
+    with p2:
+        kpi_card("Monthly Return", portfolio_data["monthly_return"], "%", "Monthly portfolio performance", signed=True)
+    with p3:
+        kpi_card("Maximum Drawdown", portfolio_data["max_drawdown"], "%", "Portfolio risk profile", signed=True)
+    with p4:
+        kpi_card("Sharpe Ratio", portfolio_data["sharpe"], "", "Risk-adjusted return")
+
+    if portfolio_data["image"] and portfolio_data["image"].exists():
+        st.image(str(portfolio_data["image"]), use_container_width=True)
+        st.markdown(f'<div class="muted">Source file: {portfolio_data["image"].name}</div>', unsafe_allow_html=True)
+    else:
+        st.warning("Portfolio image not found.")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Performance Table</div>', unsafe_allow_html=True)
 
@@ -550,7 +600,7 @@ st.sidebar.markdown("### Multi-Asset Strategy Dashboard")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F", "US Oil / CL=F"],
+    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F", "US Oil / CL=F", "Portfolio / 4 Assets"],
     index=0
 )
 
@@ -575,6 +625,8 @@ for name, data in strategies.items():
 
 if page == "Overview":
     render_comparison()
+elif page == "Portfolio / 4 Assets":
+    render_strategy(page, portfolio_data)
 else:
     render_strategy(page, strategies[page])
 
