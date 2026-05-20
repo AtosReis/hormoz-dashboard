@@ -111,7 +111,32 @@ strategies = {
         "mean_loss": -1.50,
         "gain_loss_ratio": 0.345,
         "oos_pvalue": 72.45
+    },
+    "GOLD / GC=F": {
+        "market": "GOLD",
+        "symbol": "GC=F",
+        "magic": "-",
+        "date": "19/05/2026",
+        "leverage": "-",
+        "portfolio_size": "10",
+        "image": find_image([["GOLD", "GC"], ["GOLD"], ["GC_F"]]),
+        "annual_return": 6.31,
+        "monthly_return": 0.51,
+        "last_month_return": -3.18,
+        "annual_vol": 19.36,
+        "monthly_vol": 5.72,
+        "daily_vol": 1.22,
+        "sharpe": 0.03,
+        "sqn": 0.72,
+        "max_loss": -11.58,
+        "max_drawdown": -28.29,
+        "success_rate": 87.28,
+        "mean_gain": 0.28,
+        "mean_loss": -1.66,
+        "gain_loss_ratio": 0.168,
+        "oos_pvalue": 71.13
     }
+
 }
 
 
@@ -415,6 +440,7 @@ def render_comparison():
             <span class="pill">SP500 / ES=F</span>
             <span class="pill">DJI30 / YM=F</span>
             <span class="pill">NASDAQ100 / NQ=F</span>
+            <span class="pill">GOLD / GC=F</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -470,31 +496,17 @@ def render_comparison():
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Visual Summary</div>', unsafe_allow_html=True)
 
-    g1, g2, g3 = st.columns(3)
+    visual_cols = st.columns(4)
 
-    with g1:
-        st.markdown("### SP500 / ES=F")
-        img = strategies["SP500 / ES=F"]["image"]
-        if img and img.exists():
-            st.image(str(img), use_container_width=True)
-        else:
-            st.warning("Image not found")
+    for col, strategy_name in zip(visual_cols, strategies.keys()):
+        with col:
+            st.markdown(f"### {strategy_name}")
+            img = strategies[strategy_name]["image"]
 
-    with g2:
-        st.markdown("### DJI30 / YM=F")
-        img = strategies["DJI30 / YM=F"]["image"]
-        if img and img.exists():
-            st.image(str(img), use_container_width=True)
-        else:
-            st.warning("Image not found")
-
-    with g3:
-        st.markdown("### NASDAQ100 / NQ=F")
-        img = strategies["NASDAQ100 / NQ=F"]["image"]
-        if img and img.exists():
-            st.image(str(img), use_container_width=True)
-        else:
-            st.warning("Image not found")
+            if img and img.exists():
+                st.image(str(img), use_container_width=True)
+            else:
+                st.warning("Image not found")
 
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -512,7 +524,7 @@ st.sidebar.markdown("### Multi-Asset Strategy Dashboard")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F"],
+    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F"],
     index=0
 )
 
