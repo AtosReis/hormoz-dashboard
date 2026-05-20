@@ -136,6 +136,31 @@ strategies = {
         "gain_loss_ratio": 0.168,
         "oos_pvalue": 71.13
     }
+,
+    "US Oil / CL=F": {
+        "market": "US Oil",
+        "symbol": "CL=F",
+        "magic": "-",
+        "date": "19/05/2026",
+        "leverage": "-",
+        "portfolio_size": "10",
+        "image": find_image([["USOil", "CL"], ["USOil"], ["CL_F"], ["Oil"]]),
+        "annual_return": 61.11,
+        "monthly_return": 4.05,
+        "last_month_return": 3.77,
+        "annual_vol": 20.73,
+        "monthly_vol": 6.13,
+        "daily_vol": 1.31,
+        "sharpe": 0.15,
+        "sqn": 4.17,
+        "max_loss": -8.78,
+        "max_drawdown": -29.48,
+        "success_rate": 88.21,
+        "mean_gain": 0.46,
+        "mean_loss": -1.74,
+        "gain_loss_ratio": 0.262,
+        "oos_pvalue": 94.04
+    }
 
 }
 
@@ -441,6 +466,7 @@ def render_comparison():
             <span class="pill">DJI30 / YM=F</span>
             <span class="pill">NASDAQ100 / NQ=F</span>
             <span class="pill">GOLD / GC=F</span>
+            <span class="pill">US Oil / CL=F</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -496,7 +522,7 @@ def render_comparison():
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">Visual Summary</div>', unsafe_allow_html=True)
 
-    visual_cols = st.columns(4)
+    visual_cols = st.columns(len(strategies))
 
     for col, strategy_name in zip(visual_cols, strategies.keys()):
         with col:
@@ -524,7 +550,7 @@ st.sidebar.markdown("### Multi-Asset Strategy Dashboard")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F"],
+    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F", "US Oil / CL=F"],
     index=0
 )
 
