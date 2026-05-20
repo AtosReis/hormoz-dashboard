@@ -167,12 +167,12 @@ strategies = {
 
 portfolio_data = {
     "market": "4-Asset Portfolio",
-    "symbol": "DJI30 + GC + SP500 + US Oil",
+    "symbol": "DJI30 + NDQ100 + SP500 + US Oil",
     "magic": "-",
     "date": "19/05/2026",
     "leverage": "-",
     "portfolio_size": "4",
-    "image": find_image([["portfoil", "DJ30", "SP500", "USOil"], ["portfoil"], ["portfolio"]]),
+    "image": find_image([["portfoil", "DJ30", "NDQ100", "SP500", "USOil"], ["portfoil_DJ30_NDQ100_SP500_USOil"], ["NDQ100", "USOil"]]),
     "annual_return": 85.95,
     "monthly_return": 5.31,
     "last_month_return": 5.08,
