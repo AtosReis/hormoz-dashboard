@@ -217,6 +217,32 @@ portfolio_3assets_2x_data = {
 }
 
 
+portfolio_3assets_3x_data = {
+    "market": "3-Asset Portfolio 3x",
+    "symbol": "DJI30 + NDQ100 + SP500",
+    "magic": "-",
+    "date": "19/05/2026",
+    "leverage": "3",
+    "portfolio_size": "3",
+    "image": find_image([["portfoil", "DJ30", "NDQ100", "SP500", "3x"], ["portfoil_DJ30_NDQ100_SP500_3x"], ["NDQ100", "SP500", "3x"]]),
+    "annual_return": 121.79,
+    "monthly_return": 6.86,
+    "last_month_return": 4.90,
+    "annual_vol": 21.31,
+    "monthly_vol": 6.29,
+    "daily_vol": 1.34,
+    "sharpe": 0.24,
+    "sqn": 6.67,
+    "max_loss": -6.70,
+    "max_drawdown": -12.78,
+    "success_rate": 81.72,
+    "mean_gain": 0.66,
+    "mean_loss": -1.16,
+    "gain_loss_ratio": 0.566,
+    "oos_pvalue": 51.42
+}
+
+
 def pct(value):
     return f"{value:.2f}%"
 
@@ -626,7 +652,7 @@ st.sidebar.markdown("### Multi-Asset Strategy Dashboard")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F", "US Oil / CL=F", "Portfolio / 4 Assets", "Portfolio / 3 Assets 2x"],
+    ["Overview", "SP500 / ES=F", "DJI30 / YM=F", "NASDAQ100 / NQ=F", "GOLD / GC=F", "US Oil / CL=F", "Portfolio / 4 Assets", "Portfolio / 3 Assets 2x", "Portfolio / 3 Assets 3x"],
     index=0
 )
 
@@ -655,6 +681,8 @@ elif page == "Portfolio / 4 Assets":
     render_strategy(page, portfolio_data)
 elif page == "Portfolio / 3 Assets 2x":
     render_strategy(page, portfolio_3assets_2x_data)
+elif page == "Portfolio / 3 Assets 3x":
+    render_strategy(page, portfolio_3assets_3x_data)
 else:
     render_strategy(page, strategies[page])
 
